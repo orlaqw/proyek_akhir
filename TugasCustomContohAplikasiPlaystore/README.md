@@ -1,4 +1,4 @@
-# coba
+# Screenshot dan penjelasan
 
 ![Screenshot 2024-10-29 180705](https://github.com/user-attachments/assets/0376e22e-b7af-4ab0-a49b-1cf9acc2ae8c)
 
