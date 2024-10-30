@@ -1,18 +1,10 @@
 # coba
 
-A new Flutter project.
+![Screenshot 2024-10-29 180705](https://github.com/user-attachments/assets/0376e22e-b7af-4ab0-a49b-1cf9acc2ae8c)
 
-## Getting Started
+saya membagi halaman menjadi beberapa container agar tidak terlalu banyak 
 
-This project is a starting point for a Flutter application.
+pertama pada paling atas terdapat appbar saya beri backgroundcolor blue, lalu bagian paling kiri bagian leading terdapat ikon, di tengah yaitu tittle terdapat texfield, lalu di bagian paling kanan adalah action terdapat elevatedbutton dan dua ikon yang diberi jarak menggunakan sizedbox.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-"# Project-Flutter" 
-"# Project-Fluttter" 
+pada container pertama
+saya 
