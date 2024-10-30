@@ -18,4 +18,16 @@ dibawahnya diberi container dengan background biru tua lalu diberi column dan me
 di paling kanan saya beri elevatedbutton dengan text "Ambil".
 dibawah nya saya buat seperti di container bagian pertama tetapi did container bagian kedua saya beri container background
 
+![Screenshot 2024-10-29 180754](https://github.com/user-attachments/assets/09c2bb0e-6818-405d-ac43-7769d4bcb5f9)
 
+pada bawahnya saya buat column diisi container
+
+![Screenshot 2024-10-29 180715](https://github.com/user-attachments/assets/1c4d2f69-c13a-4d8b-8e3c-9447f1d49a30)
+
+pada page pesan
+
+pertama pada paling atas saya buat appbar
+
+lalu dibawahnya saya buat column lalu row yang terdapat container
+
+dibawahnya lagi saya buat container
