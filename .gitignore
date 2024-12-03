@@ -5,7 +5,7 @@
 *.swp
 .DS_Store
 .atom/
-.buildlog/
+# .buildlog/
 .history
 .svn/
 migrate_working_dir/
