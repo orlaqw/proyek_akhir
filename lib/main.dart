@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:latihan_ukl_paket1android/view/Cinema/appBar_cinema.dart';
-import 'package:latihan_ukl_paket1android/view/Login/login_cinepolis.dart';
-import 'package:latihan_ukl_paket1android/view/Movie/appBar_movie.dart';
-import 'package:latihan_ukl_paket1android/view/MyBooking/appBar_myBooking.dart';
-import 'package:latihan_ukl_paket1android/view/Dashboard/appBar_dashboard.dart';
-import 'package:latihan_ukl_paket1android/view/splashScreen.dart';
+import 'package:latihan_ukl_paket1android/views/Beranda/beranda.dart';
+import 'package:latihan_ukl_paket1android/views/MinumAir/minum_air.dart';
+import 'package:latihan_ukl_paket1android/views/Pengingat/pengingat.dart';
+import 'package:latihan_ukl_paket1android/views/Login/login_healthyme.dart';
+import 'package:latihan_ukl_paket1android/views/Profil/profil.dart';
+import 'package:latihan_ukl_paket1android/views/Register/register_healthyme.dart';
+import 'package:latihan_ukl_paket1android/views/splashScreen.dart';
 
 void main() {  
 runApp(const MyApp()); 
@@ -21,13 +22,14 @@ Widget build(BuildContext context) {
     initialRoute: '/splashScreen', //initial route adalah awal yg terbuka
       routes: { //routing untuk menentukan alamat halaman bisa disebut url
         '/splashScreen': (context) => SplashScreen(),
-        '/login': (context) => LoginCinepolis(),
-        '/dashboard': (context) => AppbarDashboard(),
-        '/myBooking': (context) => AppbarMybooking(),
-        '/movie': (context) => AppbarMovie(),
-        '/cinema': (context) => AppbarCinema(),
+        '/login': (context) => LoginHealthyme(),
+        '/register': (context) => RegisterHealthyme(),
+        '/beranda': (context) => Beranda(),
+        '/pengingat': (context) => Pengingat(),
+        '/minumAir': (context) => MinumAir(),
+        '/profil': (context) => Profil(),
       },
-    title: "Cinepolis",
+    title: "HealthyMe",
     home: SplashScreen(),
     );
   } 
