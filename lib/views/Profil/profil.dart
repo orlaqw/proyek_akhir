@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:latihan_ukl_paket1android/widgets/bottom_nav.dart';
+import 'package:projek_aplikasi_kesehatan/widgets/bottom_nav.dart';
 
 class Profil extends StatefulWidget {
   const Profil({super.key});
@@ -18,7 +18,6 @@ class _ProfilState extends State<Profil> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -29,10 +28,9 @@ class _ProfilState extends State<Profil> {
           ),
           child: Column(
             children: [
-              
+              SizedBox(height: 50),
               Container(
-                height: MediaQuery.of(context).size.height * 0.9,
-                margin: EdgeInsets.only(top: 50, left: 20, right: 20),
+                margin: EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -40,200 +38,198 @@ class _ProfilState extends State<Profil> {
                     topRight: Radius.circular(20),
                   ),
                 ),
-                child: SingleChildScrollView(
-                  child: Column(
-                      children: [
-                      SizedBox(height: 20),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Padding(
+                child: Column(
+                  children: [
+                    SizedBox(height: 20),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           "Profil",
                           style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
                           ),
                         ),
-                        ),
                       ),
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
+                    ),
+                    SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           "Name",
                           style: TextStyle(
-                          fontSize: 16,
+                            fontSize: 16,
                           ),
                         ),
-                        ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: TextFormField(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: TextFormField(
                         controller: _nameController,
                         decoration: InputDecoration(
                           hintText: 'Enter name',
                           border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        ),
                       ),
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
+                    ),
+                    SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           "Birthday",
                           style: TextStyle(
-                          fontSize: 16,
+                            fontSize: 16,
                           ),
                         ),
-                        ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: TextFormField(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: TextFormField(
                         controller: _birthdayController,
                         decoration: InputDecoration(
                           hintText: 'Enter Birthday',
                           border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        ),
                       ),
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
+                    ),
+                    SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           "Gender",
                           style: TextStyle(
-                          fontSize: 16,
+                            fontSize: 16,
                           ),
                         ),
-                        ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: TextFormField(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: TextFormField(
                         controller: _genderController,
                         decoration: InputDecoration(
                           hintText: 'Enter Gender',
                           border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        ),
                       ),
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
+                    ),
+                    SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           "Email",
                           style: TextStyle(
-                          fontSize: 16,
+                            fontSize: 16,
                           ),
                         ),
-                        ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: TextFormField(
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: TextFormField(
                         decoration: InputDecoration(
                           hintText: 'Email',
                           border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        ),
                       ),
-                      SizedBox(height: 10),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
+                    ),
+                    SizedBox(height: 10),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Text(
                           "Forget Password?",
                           style: TextStyle(
-                          fontSize: 16,
-                          color: Color.fromARGB(255, 7, 27, 118),
-                          fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 7, 27, 118),
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        ),
                       ),
-                      SizedBox(height: 50),
-                      
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
+                    ),
+                    SizedBox(height: 50),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 86, 180, 114),
-                            shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromARGB(255, 86, 180, 114),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              minimumSize: Size(100, 40),
+                              padding: const EdgeInsets.all(5),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
-                            minimumSize: Size(100, 40),
-                            padding: const EdgeInsets.all(5),
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/beranda');
-                          },
-                          child: Text(
-                            'Switch',
-                            style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(context, '/beranda');
+                            },
+                            child: Text(
+                              'Switch',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
                           ),
                           ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromARGB(255, 253, 228, 104),
-                            shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromARGB(255, 253, 228, 104),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              minimumSize: Size(100, 40),
+                              padding: const EdgeInsets.all(5),
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             ),
-                            minimumSize: Size(100, 40),
-                            padding: const EdgeInsets.all(5),
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/login');
-                          },
-                          child: Text(
-                            'Log Out',
-                            style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(context, '/login');
+                            },
+                            child: Text(
+                              'Log Out',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
                             ),
-                          ),
                           ),
                         ],
-                        ),
                       ),
-                      SizedBox(height: 100),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: ElevatedButton(
+                    ),
+                    SizedBox(height: 100),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 239, 129, 129),
                           shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           minimumSize: Size(200, 40),
                           padding: const EdgeInsets.all(5),
@@ -245,17 +241,17 @@ class _ProfilState extends State<Profil> {
                         child: Text(
                           'Delete Account',
                           style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
                           ),
                         ),
-                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
+              SizedBox(height: 25),
             ],
           ),
         ),

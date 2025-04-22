@@ -1,20 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:projek_aplikasi_kesehatan/Sqflite_database/helper_penghitung_bmi.dart';
+import 'package:projek_aplikasi_kesehatan/models/penghitung_bmi_model.dart';
 
-class PenghitungBmi extends StatefulWidget {
-  const PenghitungBmi({super.key});
+class PenghitungBmiView extends StatefulWidget {
+  const PenghitungBmiView({super.key});
 
   @override
-  State<PenghitungBmi> createState() => _PenghitungBmiState();
+  State<PenghitungBmiView> createState() => _PenghitungBmiViewState();
 }
 
-class _PenghitungBmiState extends State<PenghitungBmi> {
+class _PenghitungBmiViewState extends State<PenghitungBmiView> {
   final TextEditingController _heightController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   String _bmiResult = "";
   String _bmiCategory = "";
   IconData _bmiIcon = Icons.help_outline;
   Color _bmiColor = Colors.black;
-  List<Map<String, String>> _bmiHistory = [];
+  List<PenghitungBmiModel> _bmiHistory = [];
+
+  HelperPenghitungBmi dbHelper = HelperPenghitungBmi.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadBmiHistory();
+  }
+
+  Future<void> _loadBmiHistory() async {
+    final data = await dbHelper.readAllBmi();
+    setState(() {
+      _bmiHistory = data;
+      _bmiHistory.sort((a, b) => b.id!.compareTo(a.id!)); // Urutkan berdasarkan ID dalam urutan menurun
+    });
+  }
 
   void _calculateBMI() {
     final double height = double.parse(_heightController.text) / 100;
@@ -37,85 +55,84 @@ class _PenghitungBmiState extends State<PenghitungBmi> {
         _bmiColor = Colors.red;
       }
 
-      _bmiHistory.insert(0, {
-        'result': _bmiResult,
-        'category': _bmiCategory,
-        'icon': _bmiIcon.codePoint.toString(),
-        'color': _bmiColor.value.toString(),
-      });
+      final newEntry = PenghitungBmiModel(
+        result: _bmiResult,
+        category: _bmiCategory,
+        icon: _bmiIcon.codePoint,
+        color: _bmiColor.value,
+      );
+
+      dbHelper.create(newEntry);
+      _loadBmiHistory();
     });
   }
 
   void _removeHistoryItem(int index) {
-    setState(() {
-      _bmiHistory.removeAt(index);
-    });
+    final id = _bmiHistory[index].id!;
+    dbHelper.delete(id);
+    _loadBmiHistory();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Color.fromARGB(255, 239, 129, 129), Colors.white],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          title: GestureDetector(
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/beranda');
-            },
-            child: Text(
-              "Back to home",
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-          foregroundColor: Colors.black,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios_new, color: Colors.black),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/beranda');
-            },
+    return Scaffold(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color.fromARGB(255, 239, 129, 129), Colors.white],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
-
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(
-                    "What is your BMI?",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
+        child: Column(
+          children: [
+            AppBar(
+              backgroundColor: Colors.transparent,
+              title: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacementNamed(context, '/beranda');
+                },
+                child: Text(
+                  "Back to home",
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
-              IntrinsicHeight(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.8,
-                  margin: EdgeInsets.only(top: 50, left: 20, right: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
+              foregroundColor: Colors.black,
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back_ios_new, color: Colors.black),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/beranda');
+                },
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          "What is your BMI?",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  child: IntrinsicHeight(
-                    child: SingleChildScrollView(
+                    Container(
+                      margin: EdgeInsets.only(top: 20, left: 20, right: 20), // Kurangi margin top dari 50 menjadi 20
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                        ),
+                      ),
                       child: Column(
                         children: [
                           SizedBox(height: 20),
@@ -174,7 +191,7 @@ class _PenghitungBmiState extends State<PenghitungBmi> {
                                   controller: _heightController,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
-                                    labelText: "Height (cm)",
+                                    labelText: "Input Height (cm)",
                                     prefixIcon: Icon(Icons.straighten, size: 35),
                                   ),
                                 ),
@@ -183,7 +200,7 @@ class _PenghitungBmiState extends State<PenghitungBmi> {
                                   controller: _weightController,
                                   keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
-                                    labelText: "Weight (kg)",
+                                    labelText: "Input Weight (kg)",
                                     prefixIcon: Icon(Icons.monitor_weight, size: 45),
                                   ),
                                 ),
@@ -211,14 +228,14 @@ class _PenghitungBmiState extends State<PenghitungBmi> {
                               ? Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: Text(
-                                    "Tidak ada histori",
+                                    "No History Yet",
                                     style: TextStyle(fontSize: 16, color: Colors.grey),
                                   ),
                                 )
                               : Column(
                                   children: _bmiHistory.asMap().entries.map((entry) {
                                     int index = entry.key;
-                                    Map<String, String> historyItem = entry.value;
+                                    PenghitungBmiModel historyItem = entry.value;
                                     return Card(
                                       margin: EdgeInsets.all(16.0),
                                       color: Colors.white, // Set card color to white
@@ -227,9 +244,9 @@ class _PenghitungBmiState extends State<PenghitungBmi> {
                                         side: BorderSide(color: Colors.grey, width: 1),
                                       ),
                                       child: ListTile(
-                                        leading: Icon(IconData(int.parse(historyItem['icon']!), fontFamily: 'MaterialIcons'), color: Color(int.parse(historyItem['color']!))),
-                                        title: Text("BMI: ${historyItem['result']}"),
-                                        subtitle: Text("Category: ${historyItem['category']}"),
+                                        leading: Icon(IconData(historyItem.icon, fontFamily: 'MaterialIcons'), color: Color(historyItem.color)),
+                                        title: Text("BMI: ${historyItem.result}"),
+                                        subtitle: Text("Category: ${historyItem.category}"),
                                         trailing: IconButton(
                                           icon: Icon(Icons.delete),
                                           onPressed: () => _removeHistoryItem(index),
@@ -241,11 +258,11 @@ class _PenghitungBmiState extends State<PenghitungBmi> {
                         ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

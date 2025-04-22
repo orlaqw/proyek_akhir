@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:latihan_ukl_paket1android/views/MinumAir/minum_air.dart';
+import 'package:projek_aplikasi_kesehatan/views/MinumAir/bar_ml.dart';
+import 'package:projek_aplikasi_kesehatan/views/MinumAir/minum_air_view.dart';
 
-class CardKonsumsiAir extends StatelessWidget {
+class CardMinumAir extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -23,16 +24,13 @@ class CardKonsumsiAir extends StatelessWidget {
         ),
         title: Text(
           'Consumption of Water',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
-        subtitle: Text(
-          'Water Consumption Today: 2 Liters',
-          style: TextStyle(color: Colors.grey),
-        ),
+        subtitle: BarMl(),
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MinumAir()),
+            MaterialPageRoute(builder: (context) => MinumAirView()),
           );
         },
       ),

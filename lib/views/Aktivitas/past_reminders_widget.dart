@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../models/aktivitas_model.dart';
-import 'past_reminders_widget.dart';
 
-class TodayRemindersWidget extends StatelessWidget {
-  final List<AktivitasModel> todayReminders;
+class PastRemindersWidget extends StatelessWidget {
+  final List<AktivitasModel> pastReminders;
   final Function(int) onEdit;
   final Function(int) onDelete;
 
-  TodayRemindersWidget({
-    required this.todayReminders,
+  PastRemindersWidget({
+    required this.pastReminders,
     required this.onEdit,
     required this.onDelete,
   });
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-
-    List<AktivitasModel> pastReminders = todayReminders.where((item) => item.reminderTime.isBefore(now)).toList();
-    List<AktivitasModel> upcomingReminders = todayReminders.where((item) => item.reminderTime.isAfter(now) || item.reminderTime.isAtSameMomentAs(now)).toList();
-
-    return ListView(
-      padding: EdgeInsets.all(12),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ...upcomingReminders.map((reminder) {
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          child: Text(
+            'Missed Activities',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ),
+        ...pastReminders.map((reminder) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Card(
-                color: Colors.white,
+                color: Colors.grey[300],
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                   side: BorderSide(color: Colors.grey, width: 1),
@@ -71,9 +72,9 @@ class TodayRemindersWidget extends StatelessWidget {
                           child: Text(choice),
                           onTap: () {
                             if (choice == "Edit") {
-                              onEdit(todayReminders.indexOf(reminder));
+                              onEdit(pastReminders.indexOf(reminder));
                             } else if (choice == "Delete") {
-                              onDelete(todayReminders.indexOf(reminder));
+                              onDelete(pastReminders.indexOf(reminder));
                             }
                           },
                         );
@@ -85,12 +86,6 @@ class TodayRemindersWidget extends StatelessWidget {
             ],
           );
         }).toList(),
-        if (pastReminders.isNotEmpty)
-          PastRemindersWidget(
-            pastReminders: pastReminders,
-            onEdit: onEdit,
-            onDelete: onDelete,
-          ),
       ],
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:latihan_ukl_paket1android/views/Aktivitas/input_widget_aktivitas.dart';
-import 'package:latihan_ukl_paket1android/views/Aktivitas/today_reminder_widget.dart';
-import 'package:latihan_ukl_paket1android/views/Aktivitas/upcoming_reminder_widget.dart';
+import 'package:projek_aplikasi_kesehatan/Sqflite_database/helper_aktivitas.dart';
+import 'package:projek_aplikasi_kesehatan/views/Aktivitas/input_widget_aktivitas.dart';
+import 'package:projek_aplikasi_kesehatan/views/Aktivitas/today_reminder_widget.dart';
+import 'package:projek_aplikasi_kesehatan/views/Aktivitas/upcoming_reminder_widget.dart';
 import '../../controllers/aktivitas_controller.dart';
 import '../../models/aktivitas_model.dart';
 import '/widgets/alertdialog.dart';
@@ -22,6 +23,7 @@ class _AktivitasViewState extends State<AktivitasView> {
   final formKey = GlobalKey<FormState>();
   InputWidgetAktivitas modal = InputWidgetAktivitas();
   alertDialog alert = alertDialog();
+  HelperAktivitas dbHelper = HelperAktivitas.instance;
 
   List<String> listAct = ["Edit", "Delete"];
   List<AktivitasModel>? rencana;
@@ -29,20 +31,31 @@ class _AktivitasViewState extends State<AktivitasView> {
   List<String> judulOptions = ['Weight Lifting', 'Aquatic', 'Martial Arts', 'Athletic', 'Calisthenics', 'Gymnastics', 'Ball Game', 'Other'];
   String? selectedJudul;
 
-  getKegiatan() {
-    setState(() {
-      rencana = aktivitasfisik.aktivitas;
-    });
-  }
-
-  addCard(data) {
-    rencana!.add(data);
-    getKegiatan();
-  }
-
   @override
   void initState() {
     super.initState();
+    getKegiatan();
+  }
+
+  Future<void> getKegiatan() async {
+    final data = await dbHelper.readAllAktivitas();
+    setState(() {
+      rencana = data;
+    });
+  }
+
+  Future<void> addCard(AktivitasModel data) async {
+    await dbHelper.create(data);
+    getKegiatan();
+  }
+
+  Future<void> updateCard(AktivitasModel data) async {
+    await dbHelper.update(data);
+    getKegiatan();
+  }
+
+  Future<void> deleteCard(int id) async {
+    await dbHelper.delete(id);
     getKegiatan();
   }
 
@@ -102,7 +115,7 @@ class _AktivitasViewState extends State<AktivitasView> {
                   addCard(data);
                 });
               },
-              child: Icon(Icons.add, color: Color.fromARGB(255, 253, 228, 104)),
+              child: Icon(Icons.add, color: Colors.orange),
               backgroundColor: Colors.white,
             )
           ],
@@ -137,20 +150,14 @@ class _AktivitasViewState extends State<AktivitasView> {
                   });
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     modal.showFullModal(context, (data) {
-                      setState(() {
-                        rencana![index] = data;
-                        getKegiatan();
-                      });
+                      updateCard(data);
                     }, initialData: todayReminders[index]);
                   });
                 },
                 onDelete: (index) {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     alert.showAlertDialog(context, () {
-                      setState(() {
-                        aktivitasfisik.aktivitas.removeWhere((item) => item.id == todayReminders[index].id);
-                        getKegiatan();
-                      });
+                      deleteCard(todayReminders[index].id!);
                     });
                   });
                 },
@@ -175,20 +182,14 @@ class _AktivitasViewState extends State<AktivitasView> {
                   });
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     modal.showFullModal(context, (data) {
-                      setState(() {
-                        rencana![index] = data;
-                        getKegiatan();
-                      });
+                      updateCard(data);
                     }, initialData: upcomingReminders[index]);
                   });
                 },
                 onDelete: (index) {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     alert.showAlertDialog(context, () {
-                      setState(() {
-                        aktivitasfisik.aktivitas.removeWhere((item) => item.id == upcomingReminders[index].id);
-                        getKegiatan();
-                      });
+                      deleteCard(upcomingReminders[index].id!);
                     });
                   });
                 },

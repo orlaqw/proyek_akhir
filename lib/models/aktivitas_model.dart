@@ -1,22 +1,56 @@
 import 'package:flutter/material.dart';
 
-class AktivitasModel{ //untuk menyimpan data
-  int id;
-  String judul; //tipe data
-  String deskripsi; 
-  DateTime reminderTime; // Tambahkan ini
+class AktivitasModel {
+  int? id;
+  String judul;
+  String deskripsi;
+  DateTime reminderTime;
   IconData icon;
-  bool isChecked;
 
-   //tanda tanya memperbolehkan null, jika sudah ada tanda tanya tidak perlu required
-  AktivitasModel({ //constructor
-    required this.id, 
-    required this.judul, 
-    required this.deskripsi, 
-    required this.reminderTime, 
+  AktivitasModel({
+    this.id,
+    required this.judul,
+    required this.deskripsi,
+    required this.reminderTime,
     required this.icon,
-    this.isChecked = false,
-    
-    }); //constructor, jika memanggil Movie harus ada parameter. Jika ada yang memanggil Movie, yang memanggil harus menyertakan int, string, bool, string, voteAverage
-  // required agar tidak boleh null
+  });
+
+  // Convert a AktivitasModel into a Map.
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'judul': judul,
+      'deskripsi': deskripsi,
+      'reminderTime': reminderTime.toIso8601String(),
+      'icon': icon.codePoint,
+    };
+  }
+
+  // Convert a Map into a AktivitasModel.
+  factory AktivitasModel.fromMap(Map<String, dynamic> map) {
+    return AktivitasModel(
+      id: map['id'],
+      judul: map['judul'],
+      deskripsi: map['deskripsi'],
+      reminderTime: DateTime.parse(map['reminderTime']),
+      icon: IconData(map['icon'], fontFamily: 'MaterialIcons'),
+    );
+  }
+
+  // Create a copy of the AktivitasModel with updated fields.
+  AktivitasModel copy({
+    int? id,
+    String? judul,
+    String? deskripsi,
+    DateTime? reminderTime,
+    IconData? icon,
+  }) {
+    return AktivitasModel(
+      id: id ?? this.id,
+      judul: judul ?? this.judul,
+      deskripsi: deskripsi ?? this.deskripsi,
+      reminderTime: reminderTime ?? this.reminderTime,
+      icon: icon ?? this.icon,
+    );
+  }
 }
