@@ -1,5 +1,5 @@
 name: projek_aplikasi_kesehatan
-description: "A new Flutter project."
+description: A new Flutter project.
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -19,6 +19,8 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   http: ^1.2.2
   cupertino_icons: ^1.0.8
+  firebase_core: ^2.25.4
+  firebase_auth: ^4.16.0
 
 dev_dependencies:
   flutter_test:

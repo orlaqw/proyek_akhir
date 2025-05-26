@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/splashScreen',
         routes: {
           '/splashScreen': (context) => SplashScreen(),
-          '/login': (context) => LoginHealthyme(),
-          '/register': (context) => RegisterHealthyme(),
+          '/login': (context) => LoginPage(),
+          '/register': (context) => RegisterPage(),
           '/beranda': (context) => BerandaView(),
           '/pengingat': (context) => Pengingat(),
           '/minumAir': (context) => MinumAirView(),
